@@ -42,28 +42,34 @@ public class ReceivedText extends Dto {
 	}
 
 	/**
-	 * @return text
+	 * @return text {@link String}
 	 */
 	public String getText() {
 		return text;
 	}
 
 	/**
+	 * Устанавливает параметр
+	 * 
 	 * @param text
+	 *            text {@link String}
 	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
 	/**
-	 * @return percent
+	 * @return percent {@link int}
 	 */
 	public int getPercent() {
 		return percent;
 	}
 
 	/**
+	 * Устанавливает параметр
+	 * 
 	 * @param percent
+	 *            percent {@link int}
 	 */
 	public void setPercent(int percent) {
 		this.percent = percent;
