@@ -11,7 +11,7 @@ import java.io.Serializable;
 public class Dto implements Serializable {
 
 	/**
-	 * 
+	 * Версия
 	 */
 	private static final long serialVersionUID = 8833947379512255109L;
 
