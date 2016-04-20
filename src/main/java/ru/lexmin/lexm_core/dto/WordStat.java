@@ -1,5 +1,6 @@
 package ru.lexmin.lexm_core.dto;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -28,7 +29,8 @@ public class WordStat extends Dto {
 	// кол-во слов в тексте, на который ссылка receivedText
 	private int countOfWords;
 
-	// статистика по часторе слов текста, на который ссылка receivedText
+	// статистика по часторе слов текста, на который ссылка receivedText,
+	// отфильтрованная с учётом процента понимания
 	private Map<String, Integer> frequencyWords;
 
 	/**
@@ -49,6 +51,19 @@ public class WordStat extends Dto {
 		this.receivedText = receivedText;
 		this.countOfWords = countOfWords;
 		this.frequencyWords = frequencyWords;
+	}
+
+	/**
+	 * Конструктор задаёт значение поля receivedText из передоваемого объекта.
+	 * остальнве поля интциализируются значениями по умолчанию
+	 * 
+	 * @param receivedText
+	 */
+	public WordStat(ReceivedText receivedText) {
+		this.receivedText = receivedText;
+		// инициализация остальных полей значениями по умолчинию
+		this.countOfWords = 0;
+		this.frequencyWords = new HashMap<String, Integer>();
 	}
 
 	/**
