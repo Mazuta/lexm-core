@@ -71,16 +71,19 @@ public class TextAnalyzerImp implements TextAnalyzer {
 		Pattern patternWord = Pattern.compile("(?<word>[a-z']+)");
 		Matcher matcherWord = patternWord.matcher(text);
 
+		// поиск слов в тексте по паттерну
 		while (matcherWord.find()) {
 
 			newWord = matcherWord.group("word");
 
 			if (wordsMap.containsKey(newWord)) {
 
+				// если слово уже есть в Map то увеличиваеи его количество на 1
 				wordsMap.replace(newWord, wordsMap.get(newWord) + ONE_WORD);
 
 			} else {
 
+				// если слова в Map нет то добавляем его со значением 1
 				wordsMap.put(newWord, ONE_WORD);
 
 			}
@@ -101,6 +104,7 @@ public class TextAnalyzerImp implements TextAnalyzer {
 
 		int countOfWords = 0;
 
+		// считаем в цикле сумму значений для всех слов в Map
 		for (Integer value : wordsMap.values())
 			countOfWords += value;
 
@@ -137,15 +141,22 @@ public class TextAnalyzerImp implements TextAnalyzer {
 	 */
 	private Map<String, Integer> filterWordsMap(Map<String, Integer> wordsMap, int countOfWords, int percent) {
 
+		// LinkedHashMap - ассоциативный массив, который запоминает порядок
+		// добавления элементов
 		Map<String, Integer> resultMap = new LinkedHashMap<String, Integer>();
 
 		int sumPercentOfWords = 0;
 
+		// создаёт поток из Map с записями Entry<String, Integer>,
+		// отсортированными по убыванию
 		Stream<Entry<String, Integer>> streamWords = wordsMap.entrySet().stream().sorted(Map.Entry.comparingByValue(
 				(Integer value1, Integer value2) -> (value1.equals(value2)) ? 0 : ((value1 < value2) ? 1 : -1)));
 
+		// создаём итератор для обхода всех записей потока
 		Iterator<Entry<String, Integer>> iterator = streamWords.iterator();
 
+		// добавляем в resultMap каждую последующую запись из итератора, пока не
+		// будет тостигнут заданный процент понимания
 		while (iterator.hasNext() && (sumPercentOfWords < percent)) {
 
 			Entry<String, Integer> wordEntry = iterator.next();
